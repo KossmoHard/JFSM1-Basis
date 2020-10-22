@@ -1,3 +1,58 @@
+<?php
+// подключаем бд
+include('dbconnect.php');
+
+// проверка данных на валидность
+if (isset($_POST['submit'])) {
+
+    $errors = array();
+
+    // trim — Удаляет пробелы из начала и конца строки
+    $fio = trim($_POST['fio']);
+    if ($fio == ''){
+        $errors[] = "Введите ФИО.";
+    }
+
+    $email = trim($_POST['email']);
+    if ($email == ''){
+        $errors[] = "Введите email.";
+    }
+
+    $result_query = $mysqli->query("SELECT `email` FROM `users` WHERE `email`='".$email."'");
+    if ($result_query->num_rows == 1){
+        $errors[] = "Ошибка. Данный email уже используется.";
+    }
+
+    $phone = trim($_POST['phone']);
+    if ($phone == ''){
+        $errors[] = "Введите телефон.";
+    }
+
+    $age = trim($_POST['age']);
+    if ($age == ''){
+        $errors[] = "Укажите возраст.";
+    }
+
+    $resume = trim($_POST['resume']);
+    if ($resume == ''){
+        $errors[] = "Напишите резюме.";
+    }
+
+    if (isset($_FILES['photo'])) {
+        $file = $_FILES['photo'];
+    }
+}
+
+if (empty($errors)){
+    $result_query_insert = $mysqli->query("INSERT INTO `users` (FIO, email, phone, age, photo, resume) VALUES ('".$fio."', '".$email."', '".$phone."', '".$age."', '".$file."', '".$resume."')");
+
+    if ($result_query_insert){
+        echo 'Данные успешно добавлены';
+    }
+}
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -8,7 +63,19 @@
     <title>Stage1</title>
 </head>
 <body>
-    <form action="form.php" enctype="multipart/form-data">
+    <div class="error-massage">
+        <ul>
+        <?php
+            // вывод ошибок полей формы, если найдены
+            if (!empty($errors)) {
+                foreach ($errors as $value) {
+                    echo '<li>' . $value . '</li>';
+                }
+            }
+        ?>
+        </ul>
+    </div>
+    <form action="form.php" method="POST" enctype="multipart/form-data">
         <label>ФИО</label><br>
         <input type="text" name="fio"><br>
         <label>Email</label><br>
