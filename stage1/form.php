@@ -40,13 +40,18 @@ if (isset($_POST['submit'])) {
 
     if (isset($_FILES['photo'])) {
         $file = $_FILES['photo'];
+        $current_path = $file['tmp_name'];
+        $filename = $file['name'];
+        $new_path = dirname(__FILE__) . '/img/' . $filename;
     }
+
 }
 
 if (empty($errors)){
-    $result_query_insert = $mysqli->query("INSERT INTO `users` (FIO, email, phone, age, photo, resume) VALUES ('".$fio."', '".$email."', '".$phone."', '".$age."', '".$file."', '".$resume."')");
+    $result_query_insert = $mysqli->query("INSERT INTO `users` (FIO, email, phone, age, photo, resume) VALUES ('".$fio."', '".$email."', '".$phone."', '".$age."', '".$filename."', '".$resume."')");
 
     if ($result_query_insert){
+        move_uploaded_file($current_path, $new_path);
         echo 'Данные успешно добавлены';
     }
 }
