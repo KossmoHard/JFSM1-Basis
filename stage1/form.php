@@ -7,50 +7,93 @@ if (isset($_POST['submit'])) {
 
     $errors = array();
 
-    // trim — Удаляет пробелы из начала и конца строки
-    $fio = trim($_POST['fio']);
-    if ($fio == ''){
+    if (empty($_POST["fio"])) {
         $errors[] = "Введите ФИО.";
+    } else {
+        $fio = input_valid($_POST["fio"]);
+
+        if (strlen($fio) < 8){
+            $errors[] = "ФИО: Минимум 8 символов";
+        }
+        if (!preg_match("/^[a-zа-яё\s]+$/iu",$fio)) {
+            $errors[] = "ФИО: Разрешены только буквы и пробелы";
+        }
     }
 
-    $email = trim($_POST['email']);
-    if ($email == ''){
+    if (empty($_POST["email"])) {
         $errors[] = "Введите email.";
+    } else {
+        $email = input_valid($_POST["email"]);
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = "Введите правильный email.";
+        }
+
+        $result_query = $mysqli->query("SELECT `email` FROM `users` WHERE `email`='".$email."'");
+        if ($result_query->num_rows == 1) {
+            $errors[] = "Ошибка. Данный email уже используется.";
+        }
     }
 
-    $result_query = $mysqli->query("SELECT `email` FROM `users` WHERE `email`='".$email."'");
-    if ($result_query->num_rows == 1){
-        $errors[] = "Ошибка. Данный email уже используется.";
-    }
-
-    $phone = trim($_POST['phone']);
-    if ($phone == ''){
+    if (empty($_POST["phone"])) {
         $errors[] = "Введите телефон.";
+    } else {
+        $phone = phone_valid($_POST["phone"]);
+        if(!$phone) {
+            $errors[] = "Введите корректный телефон. Пример 0995426374. 10 цифр";
+        }
     }
 
-    $age = trim($_POST['age']);
-    if ($age == ''){
+    if (empty($_POST["age"])) {
         $errors[] = "Укажите возраст.";
+    } else {
+        $age = input_valid($_POST["age"]);
     }
 
-    $resume = trim($_POST['resume']);
-    if ($resume == ''){
-        $errors[] = "Напишите резюме.";
-    }
-
-    if (isset($_FILES['photo'])) {
+    if (empty($_FILES['photo']['name'])) {
+        $errors[] = "Загрузите изображение.";
+    } else {
         $file = $_FILES['photo'];
         $current_path = $file['tmp_name'];
         $filename = $file['name'];
         $new_path = dirname(__FILE__) . '/img/' . $filename;
     }
 
+    if (empty($_POST["resume"])) {
+        $errors[] = "Напишите резюме.";
+    } else {
+        $resume = input_valid($_POST["resume"]);
+    }
+
 }
 
-if (empty($errors)){
+/*
+ * trim удаляет пробелы из начала и конца строки,
+ * stripcslashes - удаляет экранированние символов
+ * htmlspecialchars — преобразует специальные символы в HTML-сущности
+ *
+ */
+function input_valid($data) {
+    $data = trim($data);
+    $data = stripcslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+}
+
+// Функция Ищет в заданном массиве $data совпадения с шаблоном pattern
+function phone_valid($data) {
+    foreach ($data as $phone) {
+        if(!preg_match('/^[0-9]{3}[0-9]{3}[0-9]{4}$/',$phone)) {
+            return false;
+        }
+    }
+    return $data;
+}
+
+if (empty($errors)) {
+    $phone = serialize($phone);
     $result_query_insert = $mysqli->query("INSERT INTO `users` (FIO, email, phone, age, photo, resume) VALUES ('".$fio."', '".$email."', '".$phone."', '".$age."', '".$filename."', '".$resume."')");
 
-    if ($result_query_insert){
+    if ($result_query_insert) {
         move_uploaded_file($current_path, $new_path);
         echo 'Данные успешно добавлены';
     }
@@ -68,7 +111,7 @@ if (empty($errors)){
     <title>Stage1</title>
 </head>
 <body>
-    <div class="error-massage">
+    <div class="errors-massage">
         <ul>
         <?php
             // вывод ошибок полей формы, если найдены
@@ -80,13 +123,16 @@ if (empty($errors)){
         ?>
         </ul>
     </div>
-    <form action="form.php" method="POST" enctype="multipart/form-data">
+    <form id="form" action="form.php" method="POST" enctype="multipart/form-data">
         <label>ФИО</label><br>
         <input type="text" name="fio"><br>
         <label>Email</label><br>
         <input type="text" name="email"><br>
+        <div id="phone">
         <label>Телефон</label><br>
-        <input type="tel" name="phone"><br>
+            <input type="tel" name="phone[]" class="phone">
+            <input type="button" id="add_input" onclick="addInput()" value="+"><br>
+        </div>
         <label>Возраст</label><br>
         <input type="number" name="age"><br>
         <label>Фото</label><br>
@@ -95,5 +141,10 @@ if (empty($errors)){
         <textarea name="resume"></textarea><br>
         <input type="submit" name="submit">
     </form>
+    <script>
+        function addInput() {
+            document.querySelector('#phone').insertAdjacentHTML('beforeEnd', '<input type="tel" name="phone[]" class="phone"><br>');
+        };
+    </script>
 </body>
 </html>
