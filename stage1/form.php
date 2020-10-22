@@ -13,7 +13,7 @@ if (isset($_POST['submit'])) {
         $fio = input_valid($_POST["fio"]);
 
         if (strlen($fio) < 8){
-            $errors[] = "ФИО: Минимум 8 символов";
+            $errors[] = "ФИО: Минимум 9 символов";
         }
         if (!preg_match("/^[a-zа-яё\s]+$/iu",$fio)) {
             $errors[] = "ФИО: Разрешены только буквы и пробелы";
