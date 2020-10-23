@@ -2,6 +2,8 @@
 // подключаем бд
 include('dbconnect.php');
 
+$count_phone = 1;
+
 // проверка данных на валидность
 if (isset($_POST['submit'])) {
 
@@ -41,6 +43,10 @@ if (isset($_POST['submit'])) {
         if(!$phone) {
             $errors[] = "Введите корректный телефон. Пример 0995426374. 10 цифр";
         }
+    }
+
+    if (!empty($_POST["count_phone"])){
+        $count_phone = $_POST["count_phone"];
     }
 
     if (empty($_POST["age"])) {
@@ -99,6 +105,10 @@ if (empty($errors)) {
     }
 }
 
+if (isset($_POST['add_phone'])){
+    $count_phone += (int) $_POST['count_phone'];
+}
+
 ?>
 
 <!doctype html>
@@ -125,26 +135,26 @@ if (empty($errors)) {
     </div>
     <form id="form" action="form.php" method="POST" enctype="multipart/form-data">
         <label>ФИО</label><br>
-        <input type="text" name="fio"><br>
+        <input type="text" name="fio" value="<?php echo $_POST['fio']; ?>"><br>
         <label>Email</label><br>
-        <input type="text" name="email"><br>
+        <input type="text" name="email" value="<?php echo $_POST['email']; ?>"><br>
+
         <div id="phone">
-        <label>Телефон</label><br>
-            <input type="tel" name="phone[]" class="phone">
-            <input type="button" id="add_input" onclick="addInput()" value="+"><br>
+            <label>Телефон</label><br>
+            <input type="hidden" name="count_phone" value="<?php echo $count_phone; ?>">
+            <?php for ($x=0; $x < $count_phone; $x++): ?>
+                <input type="tel" name="phone[]" value="<?php echo $_POST["phone"][$x]; ?>" class="phone"><br>
+            <?php endfor; ?>
+            <br><input type="submit" name="add_phone" value="Добавить поле"><br><br>
         </div>
+
         <label>Возраст</label><br>
-        <input type="number" name="age"><br>
+        <input type="number" name="age" value="<?php echo $_POST['age']; ?>"><br>
         <label>Фото</label><br>
         <input type="file" name="photo"><br>
         <label>Резюме</label><br>
-        <textarea name="resume"></textarea><br>
+        <textarea name="resume"><?php echo $_POST['resume']; ?></textarea><br>
         <input type="submit" name="submit">
     </form>
-    <script>
-        function addInput() {
-            document.querySelector('#phone').insertAdjacentHTML('beforeEnd', '<input type="tel" name="phone[]" class="phone"><br>');
-        };
-    </script>
 </body>
 </html>
