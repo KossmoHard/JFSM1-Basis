@@ -1,3 +1,3 @@
 # JFSM1-Basis
 
-http://localhost/JFSM1-BASIS/
+http://f0480566.xsph.ru/
