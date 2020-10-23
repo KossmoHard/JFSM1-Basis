@@ -14,5 +14,3 @@ if ($mysqli->connect_errno) {
 
 // Устанавливаем кодировку подключения
 $mysqli->set_charset('utf8');
-
-?>
