@@ -5,6 +5,23 @@
     <title>Stage2</title>
 </head>
 <body>
+<form id="form" action="form.php" method="POST" enctype="multipart/form-data">
+    <label>ФИО</label><br>
+    <input type="text" name="fio" value=""><br>
+    <label>Email</label><br>
+    <input type="text" name="email" value=""><br>
+    <label>Телефон</label><br>
+    <input type="tel" name="phone[]"><br>
+    <br><input type="submit" name="add_phone" value="Добавить поле"><br><br>
+    <label>Возраст</label><br>
+    <input type="number" name="age" value=""><br>
+    <label>Фото</label><br>
+    <input type="file" name="photo"><br>
+    <label>Резюме</label><br>
+    <textarea name="resume"></textarea><br>
+    <input type="submit" name="submit">
+</form>
 
+<script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
