@@ -5,27 +5,24 @@
     <title>Stage2</title>
 </head>
 <body>
-<form name="login-form" action="#" method="POST" enctype="multipart/form-data">
+<form id="form" name="login-form" action="#" method="POST" enctype="multipart/form-data">
     <label>ФИО</label><br>
-    <input type="text" name="fio" value=""><br>
+    <input type="text" name="fio" value="" class="data-field"><br>
     <label>Email</label><br>
-    <input type="text" name="email" value=""><br>
+    <input type="text" name="email" value="" class="data-field"><br>
     <label>Телефон</label><br>
-    <div class="phone">
-        <input type="tel" name="phone" class="phone"><input type="button" name="add_phone" value="+"
-                                                              onclick="addInput()"><br>
-    </div>
+    <input type="tel" name="phone" class="data-field"><br>
+    <input type="button" name="add_phone" value="Добавить поле" class="add_phone" onclick="addInput()"><br>
     <label>Возраст</label><br>
-    <input type="number" name="age" value=""><br>
+    <input type="number" name="age" value="" class="data-field"><br>
     <label>Фото</label><br>
-    <input type="file" name="photo"><br>
+    <input type="file" name="photo" class="data-field"><br>
     <label>Резюме</label><br>
-    <textarea name="resume"></textarea><br>
-    <button type="submit" name="submit">Отправить№</button>
+    <textarea name="resume" class="data-field"></textarea><br>
+    <button type="submit" name="submit">Отправить</button>
 </form>
-<div class="errors-massages">
-
-</div>
+<br>
+<div class="messages"></div>
 <script type="text/javascript" src="js/validation.min.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
 </body>
