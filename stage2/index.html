@@ -11,17 +11,18 @@
     <label>Email</label><br>
     <input type="text" name="email" value=""><br>
     <label>Телефон</label><br>
-    <input type="tel" name="phone[]"><br>
-    <br><input type="submit" name="add_phone" value="Добавить поле"><br><br>
+    <div class="phone">
+        <input type="tel" name="phone[]" class="phone"><input type="button" name="add_phone" value="+"
+                                                              onclick="addInput()"><br>
+    </div>
     <label>Возраст</label><br>
     <input type="number" name="age" value=""><br>
     <label>Фото</label><br>
     <input type="file" name="photo"><br>
     <label>Резюме</label><br>
     <textarea name="resume"></textarea><br>
-    <input type="submit" name="submit">
+    <input type="button" name="submit" onclick="clickButton()">
 </form>
-
 <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
