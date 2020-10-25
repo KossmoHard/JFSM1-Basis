@@ -40,17 +40,16 @@ var validator = new FormValidator('login-form', [{
         }
 
         document.querySelector('.messages').innerHTML = errorString;
-    }else{
+    } else {
         var form = document.querySelector("#form");
         var data = '';
-        console.log(form.querySelectorAll('.data-field'));
+        //console.log(form.querySelectorAll('.data-field'));
         // переберём все элементы input, textarea формы  c классом .data-field "
         form.querySelectorAll('.data-field').forEach(function(item) {
             data += '<p>' + item.name + ': ' + item.value + '</p>';
-
         });
         document.querySelector('.messages').innerHTML = data;
-        console.log(data);
+        previewFile();
     }
 });
 
@@ -60,6 +59,19 @@ validator.setMessage('valid_email', 'В поле %s должен быть ука
 validator.setMessage('exact_length', 'Поле %s должно содержать ровно %s символов.');
 validator.setMessage('numeric', 'Поле %s должно содержать только цифры.');
 validator.setMessage('is_file_type', 'Поле %s должно содержать только файлы %s.');
+
+
+function previewFile() {
+    var image = '';
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onloadend = function () {
+        image = '<img src="' + reader.result + '" width="200px">';
+        document.querySelector('.messages').insertAdjacentHTML('beforeend', image);
+    }
+}
 
 
 
