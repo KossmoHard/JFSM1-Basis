@@ -35,8 +35,9 @@ h4 {
 }
 
 .container {
-    max-width: 1266px;
+    max-width: 1260px;
     margin: 0px auto;
+    position: relative;
 }
 .content {
     flex: 1 1 auto;
@@ -60,6 +61,7 @@ h4 {
     margin: 0px 25px;
     padding: 16px 0px;
     position: relative;
+    z-index: 99;
 }
 .header__button {
     margin-left: auto;
@@ -125,9 +127,14 @@ h4 {
     padding-left: 21px;
 }
 .header__button a.btn{
+    position: absolute;
     display: block;
     width: 143px;
     height: 42px;
+    right: -50px;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
     line-height: 42px;
     box-shadow: 3px 8px 20px 1px rgba(51, 51, 51, 0.1);
     border-radius: 2px;
