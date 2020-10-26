@@ -25,3 +25,8 @@ function addPhone() {
 function deletePhone(e) {
     e.parentNode.remove();
 }
+
+var elem = document.querySelector(".header__burger");
+
+elem.classList.toggle('active');
+elem.classList.toggle('active', false);

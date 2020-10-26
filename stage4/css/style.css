@@ -370,6 +370,7 @@ header__burger:before {
         margin-left: 20px;
     }
     .header__burger:before{
+        transition: 1s;
         content: "";
         background: #fff;
         width: 100%;
@@ -379,14 +380,18 @@ header__burger:before {
         left: 0px;
     }
     .header__burger span{
+        transition: 1s;
         background: #fff;
         width: 100%;
         height: 2px;
         position: absolute;
         left: 0px;
         top: 9px;
+        visibility: visible;
+        opacity: 1;
     }
     .header__burger:after{
+        transition: 1s;
         content: "";
         background: #fff;
         width: 100%;
@@ -396,15 +401,16 @@ header__burger:before {
         left: 0px;
     }
     .header__menu {
+        transition: height 1s;
         position: fixed;
         top: 50px;
         left: 0px;
         width: 100%;
-        height:100%;
+        height: 0px;
         background: #fff;
         z-index: 2;
         padding: 0px 0px;
-        overflow-x: scroll;
+        overflow: auto;
     }
     .header__logo {
         margin-right: 0px;
@@ -437,6 +443,12 @@ header__burger:before {
         bottom: 0px;
         margin: auto;
     }
+    .header__menu ul li.parent-menu:hover > span.arrow-menu:after {
+        transform: rotateX(0deg);
+    }
+    span.arrow-menu.active {
+        transform: rotateX(180deg);
+    }
     .header__menu ul.child-menu {
         position: relative;
         float: left;
@@ -444,28 +456,112 @@ header__burger:before {
         box-shadow: none;
         width: 100%;
         top: 0px;
+        visibility: visible;
+        opacity: 1;
     }
     .header__menu ul.child-menu li a {
         width: 100%;
     }
-    .header__menu ul.child-menu {
-        height: 0px;
+    .header__menu ul li.parent-menu > ul.child-menu {
+        display: none;
+        visibility: hidden;
+        opacity: 0;
     }
-    .header__menu ul li.parent-menu:hover > ul, ul li ul:hover {
-        height: auto;
-        padding: 15px;
-        padding-top: 0px;
+    .header__menu ul li.parent-menu > ul.child-menu.open{
+        display: block;
+        visibility: visible;
+        opacity: 1;
+        padding: 0px 15px 15px 15px;
     }
     .header__menu > ul > li {
         border-bottom: 1px solid #ddd;
     }
-    .header__burger:hover ~ .header__menu, .header__menu:hover {
+    /*.header__menu {*/
+    /*    display: none;*/
+    /*}*/
+    .header__burger.active ~ .header__menu, .header__menu.active {
         height: 100%;
     }
-    .header__menu {
-        height: 0px;
+    .header__burger.active span {
+        transition: 1s;
+        visibility: hidden;
+        opacity: 0;
+        left: -30px;
+    }
+    .header__burger.active:after {
+        transition: 1s;
+        transform: rotateX(0deg);
+        transform: rotate(45deg);
+        top: 10px;
+    }
+    .header__burger.active:before {
+        transition: 1s;
+        transform: rotate(-45deg);
+        top: 10px;
+    }
+    .header__button a.btn{
+        height: 30px;
+        line-height: 30px;
     }
 
+
+
+}
+
+@media (max-width: 600px) {
+    h4{
+        margin-bottom: 10px;
+    }
+    .footer__content {
+        justify-content: center;
+        padding: 18px 0px;
+    }
+    .footer__menu li {
+        margin-right: 16px;
+    }
+    .footer__columns {
+        text-align: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .footer__bottom .footer__content {
+        justify-content: center;
+    }
+    .footer__colums {
+        margin-bottom: 30px;
+    }
+
+    .footer__colums:last-child{
+        margin-bottom: 0px;
+    }
+    .footer__social {
+        margin-top: 17px;
+    }
+    .footer__content .footer__menu li a {
+        padding: 7px 0px;
+        display: block;
+    }
+    .header__button a.btn {
+        padding: 0px 10px;
+        width: auto;
+    }
+}
+
+@media (max-width: 320px) {
+    .container {
+        padding: 0px 15px;
+    }
+
+    .header__menu ul li a {
+        padding: 16px 15px;
+    }
+    .header__burger {
+        margin-left: 15px;
+    }
+
+    .content__tel .add_phone, .content__tel .delete_phone {
+        flex: 1 0 80px;
+    }
 }
 
 @media screen and (min-width: 1926px){
