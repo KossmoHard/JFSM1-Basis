@@ -58,11 +58,13 @@
             <label>Телефон</label>
             <div class="content__tel">
                 <input type="tel" name="phone" class="data-field">
-                <input type="button" name="add_phone" value="+" class="add_phone">
+                <input type="button" name="add_phone" value="+" class="add_phone" onclick="addPhone();">
             </div>
-            <div class="content__tel">
-              <input type="tel" name="phone" class="data-field">
-              <input type="button" name="add_phone" value="удалить" class="delete_phone">
+            <div id="test" class="content__div">
+              <div class="content__tel content__add">
+                <input type="tel" name="phone" class="data-field">
+                <input type="button" name="delete_phone" value="удалить" class="delete_phone" onclick="deletePhone(this)">
+              </div>
             </div>
             <label>Возраст</label>
             <input type="number" name="age" value="" class="data-field">
@@ -147,5 +149,6 @@
     </div>
   </footer>
 </div>
+<script src="js/script.js"></script>
 </body>
 </html>
