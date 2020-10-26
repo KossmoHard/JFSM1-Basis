@@ -7,6 +7,7 @@ nav,footer,header,aside{display:block;}
 html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:14px;-ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
 input,button,textarea{font-family:inherit;}
 input::-ms-clear{display:none;}
+input {-webkit-appearance: none;-moz-appearance: none;appearance: none;}
 button{cursor:pointer;}
 button::-moz-focus-inner{padding:0;border:0;}
 a,a:visited{text-decoration:none;}
@@ -480,7 +481,7 @@ header__burger:before {
     /*    display: none;*/
     /*}*/
     .header__burger.active ~ .header__menu, .header__menu.active {
-        height: 100%;
+        height: calc(100% - 50px);
     }
     .header__burger.active span {
         transition: 1s;
