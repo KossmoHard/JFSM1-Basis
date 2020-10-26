@@ -60,21 +60,23 @@
             <input type="text" name="email" value="" class="data-field">
             <label>Телефон</label>
             <div class="content__tel">
-                <input type="tel" name="phone" class="data-field">
-                <input type="button" name="add_phone" value="+" class="add_phone">
-            </div>
-            <div class="content__tel">
               <input type="tel" name="phone" class="data-field">
-              <input type="button" name="add_phone" value="удалить" class="delete_phone">
+              <input type="button" name="add_phone" value="+" class="add_phone" onclick="addPhone();">
+            </div>
+            <div id="test" class="content__div">
+              <div class="content__tel content__add">
+                <input type="tel" name="phone" class="data-field">
+                <input type="button" name="delete_phone" value="удалить" class="delete_phone" onclick="deletePhone(this)">
+              </div>
             </div>
             <label>Возраст</label>
             <input type="number" name="age" value="" class="data-field">
             <label>Фотография</label>
             <div class="content__upload">
-                <label class="label">
-                  <i class="upload-icons"></i>
-                  <input type="file">
-                </label>
+              <label class="label">
+                <i class="upload-icons"></i>
+                <input type="file">
+              </label>
             </div>
             <label>Резюме</label>
             <textarea name="resume" class="data-field"></textarea>
@@ -150,5 +152,6 @@
     </div>
   </footer>
 </div>
+<script src="js/script.js"></script>
 </body>
 </html>
