@@ -34,12 +34,21 @@ var validator = new FormValidator('login-form', [{
 
     if (errors.length > 0) {
         var errorString = '';
+        console.log(errors);
+        //
+        let errorMessage = document.createElement('div');
+        errorMessage.setAttribute('class', 'error-message');
 
-        for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
-            errorString += errors[i].message + '<br />';
-        }
+            for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
+                console.log(errors.length, errors[i].element);
+                errorMessage.innerHTML = errors[i].message;
+                console.log(errors[i]);
+                errors[i].element.insertAdjacentElement('afterend', errorMessage);
 
-        document.querySelector('.messages').innerHTML = errorString;
+            }
+        //});
+
+        document.querySelectorAll('.data-field').innerHTML = errorString;
     } else {
         var form = document.querySelector("#form");
         var data = '';
@@ -60,6 +69,17 @@ validator.setMessage('exact_length', 'Поле %s должно содержат�
 validator.setMessage('numeric', 'Поле %s должно содержать только цифры.');
 validator.setMessage('is_file_type', 'Поле %s должно содержать только файлы %s.');
 
+var el = document.getElementById("submit");
+el.addEventListener('click', deleteErrorMessage);
+
+function deleteErrorMessage() {
+    let errorMessage = document.querySelector('.error-message');
+
+    if (errorMessage != null) {
+        errorMessage.remove();
+    }
+
+}
 
 function previewFile() {
     var image = '';
