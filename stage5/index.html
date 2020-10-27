@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stage3</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrapper">
+  <header class="header">
+    <div class="container">
+      <div class="header__row">
+        <div class="header__logo">
+          <img src="img/logo.png" alt="" title="">
+        </div>
+        <div class="header__burger">
+          <a href="#navigation" class="nav-trigger">
+            <span></span>
+          </a>
+        </div>
+
+        <div class="header__menu nav-container">
+          <ul class="nav">
+            <li><a href="">Home</a></li>
+            <li class="parent-menu"><a href="">Courses</a>
+              <span class="arrow-menu"></span>
+              <ul class="child-menu nav">
+                <li><a href="">Project management</a></li>
+                <li><a href="">Android development</a></li>
+                <li><a href="">Online marketing</a></li>
+                <li><a href="">Front-end developer</a></li>
+              </ul>
+            </li>
+            <li><a href="">About</a></li>
+            <li><a href="">Video</a></li>
+            <li class="parent-menu"><a href="">Interesting</a>
+              <span class="arrow-menu"></span>
+              <ul class="child-menu nav">
+                <li><a href="">Blog</a></li>
+                <li><a href="">Youtube</a></li>
+                <li><a href="">Team</a></li>
+                <li><a href="">Community</a></li>
+              </ul>
+
+            </li>
+          </ul>
+        </div>
+        <div class="header__button">
+          <a href="" class="btn">Authorization</a>
+        </div>
+        <div class="overlay"></div>
+      </div>
+    </div>
+  </header>
+  <div class="content">
+    <div class="container">
+      <div class="content__row">
+        <div class="content__form">
+          <form id="form" name="login-form" action="" method="POST" enctype="multipart/form-data">
+            <label>ФИО</label>
+            <div>
+              <input type="text" name="fio" value="" class="data-field">
+            </div>
+            <label>Email</label>
+            <div>
+            <input type="email" id="email" name="email" value="" class="data-field-email">
+            </div>
+            <label>Телефон</label>
+            <div class="content__tel">
+              <input id="tel" type="tel" name="phone" class="data-field">
+              <input type="button" name="add_phone" value="+" class="add_phone" onclick="addPhone();">
+            </div>
+            <div id="test" class="content__div">
+
+            </div>
+            <label>Возраст</label>
+            <input id="age" type="number" name="age" value="" class="data-field">
+            <label>Фотография</label>
+            <div class="content__upload">
+              <label class="label">
+                <i class="upload-icons"></i>
+                <input id="photo" type="file" name="photo">
+              </label>
+            </div>
+            <label>Резюме</label>
+            <textarea id="resume" name="resume" class="data-field"></textarea>
+            <input id="submit" type="submit" name="submit" value="Отправить">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="container">
+        <div class="footer__content">
+          <ul class="footer__menu">
+            <li><a href="">Home</a></li>
+            <li><a href="">Courses</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Video</a></li>
+            <li><a href="">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__middle">
+      <div class="container">
+        <div class="footer__columns">
+          <div class="footer__colums">
+            <h4>Courses</h4>
+            <ul>
+              <li><a href="">Project management</a></li>
+              <li><a href="">Android development</a></li>
+              <li><a href="">Online marketing</a></li>
+              <li><a href="">Front-end developer</a></li>
+            </ul>
+          </div>
+          <div class="footer__colums">
+            <h4>Interesting</h4>
+            <ul>
+              <li><a href="">Blog</a></li>
+              <li><a href="">Youtube</a></li>
+              <li><a href="">Team</a></li>
+              <li><a href="">Community</a></li>
+            </ul>
+          </div>
+          <div class="footer__colums">
+            <h4>Social networks</h4>
+            <div class="footer__social">
+              <div class="footer__icon">
+                <a href="#"><i class="icon icon-twitter"></i></a>
+              </div>
+              <div class="footer__icon">
+                <a href="#"><i class="icon icon-linkedin"></i></a>
+              </div>
+              <div class="footer__icon">
+                <a href="#"><i class="icon icon-facebook"></i></a>
+              </div>
+              <div class="footer__icon">
+                <a href="#"><i class="icon icon-instagram"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <div class="footer__content">
+          <ul class="footer__menu">
+            <li><a href="">Terms of Service</a></li>
+            <li><a href="">Privacy policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<script src="js/script.js"></script>
+<script type="text/javascript" src="js/validation.min.js"></script>
+<script type="text/javascript" src="js/my-validation.js"></script>
+</body>
+</html>
