@@ -27,9 +27,7 @@ function deletePhone(e) {
 }
 
 
-// $('.header__burger').click(function() {
-//     $('.header__menu').slideToggle();
-// });
+
 
 let isMobile = {
     Android: function() {return navigator.userAgent.match(/Android/i);},
@@ -39,12 +37,22 @@ let isMobile = {
     Windows: function() {return navigator.userAgent.match(/IEMobile/i);},
     any: function() {return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());}
 };
-let body = document.querySelector('body');
-let burger = document.querySelector('.header__burger');
+
+var body = document.querySelector('body');
+
 if(isMobile.any()) {
+    var navTrigger = document.getElementsByClassName('nav-trigger')[0];
+
+    navTrigger.addEventListener('click', toggleNavigation);
+
+    function toggleNavigation(event) {
+        event.preventDefault();
+        body.classList.toggle('nav-open');
+    }
+
     body.classList.add('touch');
     let arrow = document.querySelectorAll('.arrow-menu');
-    for(i = 0; i < arrow.length; i++){
+    for(i = 0; i < arrow.length; i++) {
         let thisLink = arrow[i].previousElementSibling;
         let subMenu = arrow[i].nextElementSibling;
         let thisArrow = arrow[i];
@@ -55,9 +63,7 @@ if(isMobile.any()) {
             thisArrow.classList.toggle('active');
         });
     }
-    burger.addEventListener('click', function() {
-        burger.classList.toggle('active');
-    });
-}else {
+
+} else {
     body.classList.add('mouse');
 }

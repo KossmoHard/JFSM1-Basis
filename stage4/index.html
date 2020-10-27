@@ -15,14 +15,17 @@
           <img src="img/logo.png" alt="" title="">
         </div>
         <div class="header__burger">
-          <span></span>
+          <a href="#navigation" class="nav-trigger">
+            <span></span>
+          </a>
         </div>
-        <div class="header__menu">
-          <ul>
+
+        <div class="header__menu nav-container">
+          <ul class="nav">
             <li><a href="">Home</a></li>
             <li class="parent-menu"><a href="">Courses</a>
               <span class="arrow-menu"></span>
-              <ul class="child-menu">
+              <ul class="child-menu nav">
                 <li><a href="">Project management</a></li>
                 <li><a href="">Android development</a></li>
                 <li><a href="">Online marketing</a></li>
@@ -33,7 +36,7 @@
             <li><a href="">Video</a></li>
             <li class="parent-menu"><a href="">Interesting</a>
               <span class="arrow-menu"></span>
-              <ul class="child-menu">
+              <ul class="child-menu nav">
                 <li><a href="">Blog</a></li>
                 <li><a href="">Youtube</a></li>
                 <li><a href="">Team</a></li>
@@ -46,6 +49,7 @@
         <div class="header__button">
           <a href="" class="btn">Authorization</a>
         </div>
+        <div class="overlay"></div>
       </div>
     </div>
   </header>
