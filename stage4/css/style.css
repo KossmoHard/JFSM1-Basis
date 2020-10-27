@@ -331,9 +331,6 @@ h4 {
     background-size: 40px 40px;
 }
 
-header__burger:before {
-
-}
 @media (max-width: 1439px) {
     .header__button a.btn {
         position: relative;
