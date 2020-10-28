@@ -188,6 +188,7 @@ h4 {
 }
 .content__form textarea {
     height: 283px;
+    padding: 15px;
 }
 .content__tel {
     display: flex;
@@ -228,14 +229,17 @@ h4 {
     pointer-events:none;
     user-select:none;
     height: 0;
+    position: absolute;
+    left: 0;
 }
 .content__upload{
     margin-bottom: 20px;
 }
 .content__upload .label {
     width: 100%;
-    height: 130px;
+    height: auto;
     display: block;
+    position: relative;
     border-radius: 2px;
     border: 1px solid #b7b7b7;
     padding: 32px 0px;
@@ -330,7 +334,7 @@ h4 {
     background-size: 40px 40px;
 }
 
-.error-message {
+.error-message{
     border: 1px solid;
     padding: 10px;
     border-color: #b70404;
@@ -338,12 +342,34 @@ h4 {
     margin-bottom: 20px;
     font-size: 14px;
     transition: 1s;
+    text-align: left;
+}
+.content__tel ~ .error-message {
+    margin-top: 5px;
+}
+#success-message {
+    color: #15b137;
+    border: 0px solid #15b137;
+    text-align: center;
+    margin: 0;
+    opacity: 0;
+    padding: 0px;
+    transition: 1s;
+}
+#success-message.show{
+    border: 1px solid #15b137;
+    padding: 10px;
+    opacity: 1;
+
+}
+#image-upload {
+    max-width: 200px;
 }
 .content__upload .error-message {
     display: block;
     float: left;
     width: 100%;
-    margin-top: 25px;
+    margin-top: 55px;
 }
 @media (max-width: 1439px) {
     .header__button a.btn {

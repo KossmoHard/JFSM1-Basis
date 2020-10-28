@@ -59,16 +59,12 @@
         <div class="content__form">
           <form id="form" name="login-form" action="" method="POST" enctype="multipart/form-data">
             <label>ФИО</label>
-            <div>
-              <input type="text" name="fio" value="" class="data-field">
-            </div>
+            <input type="text" name="fio" value="" class="data-field">
             <label>Email</label>
-            <div>
             <input type="email" id="email" name="email" value="" class="data-field-email">
-            </div>
             <label>Телефон</label>
             <div class="content__tel">
-              <input id="tel" type="tel" name="phone" class="data-field">
+              <input id="tel" type="tel" name="phone[0]" class="data-field">
               <input type="button" name="add_phone" value="+" class="add_phone" onclick="addPhone();">
             </div>
             <div id="test" class="content__div">
@@ -77,15 +73,16 @@
             <label>Возраст</label>
             <input id="age" type="number" name="age" value="" class="data-field">
             <label>Фотография</label>
-            <div class="content__upload">
+            <div id="upload-file" class="content__upload">
               <label class="label">
-                <i class="upload-icons"></i>
+                <img id="image-upload" src="img/imageupload.png" alt="" title="">
                 <input id="photo" type="file" name="photo">
               </label>
             </div>
             <label>Резюме</label>
             <textarea id="resume" name="resume" class="data-field"></textarea>
             <input id="submit" type="submit" name="submit" value="Отправить">
+            <div id = "success-message"></div>
           </form>
         </div>
       </div>
