@@ -1,10 +1,3 @@
-// var clicks = 0;
-// function addInput() {
-//     clicks += 1;
-//     var inputPhone = document.querySelector('.add_phone');
-//     inputPhone.insertAdjacentHTML('beforebegin', '<input type="tel" name="phone['+ clicks +']" class="data-field"><br>');
-// }
-
 var validator = new FormValidator('login-form', [{
     name: 'fio',
     display: 'ФИО',
@@ -14,7 +7,7 @@ var validator = new FormValidator('login-form', [{
     display: 'Email',
     rules: 'required|valid_email',
 }, {
-    name: 'phone',
+    name: 'phone[0]',
     display: 'Телефон',
     rules: 'required|numeric|exact_length[10]',
 }, {
@@ -33,10 +26,7 @@ var validator = new FormValidator('login-form', [{
     event.preventDefault();
 
     if (errors.length > 0) {
-        // window.scrollTo({ top: 100, behavior: "smooth" });
-        var errorString = '';
         console.log(errors);
-
 
             for (var i = 0, errorLength = errors.length; i < errorLength; i++) {
                 let errorMessage = document.createElement('div');
@@ -61,18 +51,9 @@ var validator = new FormValidator('login-form', [{
             }
 
         handleButtonClick();
+
     } else {
-        // var form = document.querySelector("#form");
-        // var data = '';
-        // //console.log(form.querySelectorAll('.data-field'));
-        // // переберём все элементы input, textarea формы  c классом .data-field "
-        // form.querySelectorAll('.data-field').forEach(function(item) {
-        //     data += '<p>' + item.name + ': ' + item.value + '</p>';
-        // });
-        // document.querySelector('.messages').innerHTML = data;
-
-
-        previewFile();
+        sendForm();
     }
 });
 
@@ -82,6 +63,26 @@ validator.setMessage('valid_email', 'В поле %s должен быть ука
 validator.setMessage('exact_length', 'Поле %s должно содержать ровно %s символов.');
 validator.setMessage('numeric', 'Поле %s должно содержать только цифры.');
 validator.setMessage('is_file_type', 'Поле %s должно содержать только файлы %s.');
+
+
+async function sendForm() {
+    var formElem = document.querySelector('#form');
+    let response = await fetch('update_data.php', {
+        method: 'POST',
+        body: new FormData(formElem)
+    });
+
+    let result = await response.json();
+    console.log(response);
+    if (result.ok) {
+        document.getElementById('success-message').innerHTML = result.ok;
+        document.getElementById('success-message').setAttribute('class', 'show');
+
+    } else {
+        console.log(Object.keys(result).length);
+        getValidate(result);
+    }
+}
 
 var el = document.getElementById("submit");
 el.addEventListener('click', deleteErrorMessage);
@@ -97,29 +98,48 @@ function deleteErrorMessage() {
 
 }
 
-
-
-
 function handleButtonClick() {
     var hiddenElement = document.querySelectorAll('.error-message');
     hiddenElement[0].scrollIntoView({block: "center", behavior: "smooth"});
 }
 
+var uploadFile = document.getElementById('upload-file');
+uploadFile.addEventListener('change', previewFile);
+function previewFile(event) {
+    console.log(event);
+    let imageUpload = document.getElementById('image-upload');
+    let file = event.target.files[0];
 
+    if ( file ) {
+        var reader = new FileReader();
+        reader.readAsDataURL(file);
 
-function previewFile() {
-    var image = '';
-    var file    = document.querySelector('input[type=file]').files[0];
-    var reader  = new FileReader();
-    reader.readAsDataURL(file);
+        reader.onloadend = function () {
+            imageUpload.src = reader.result;
+        }
 
-    reader.onloadend = function () {
-        image = '<img src="' + reader.result + '" width="200px">';
-        document.querySelector('.messages').insertAdjacentHTML('beforeend', image);
+    } else {
+        imageUpload.src = 'img/imageupload.png';
     }
+
 }
 
+function getValidate(data) {
 
+    for (let item in data) {
+        var errorMessage = document.createElement('div');
+        errorMessage.setAttribute('class', 'error-message');
+        errorMessage.innerHTML = data[item];
+        if (item !== 'phone') {
+            console.log(item, document.getElementById(item))
+            document.getElementById(item).insertAdjacentElement("afterend", errorMessage);
+        } else {
+            document.getElementById('test').insertAdjacentElement("afterend", errorMessage);
+        }
+    }
+
+    handleButtonClick();
+}
 
 
 
